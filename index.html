@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Day I Chose You</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <audio id="bg-music" loop>
+        <source src="assets/romantic-love-hopeful-music-336295.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Animated Background -->
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+    </div>
+
+    <div id="app">
+        <!-- Steps will be dynamically managed here -->
+
+        <!-- STEP 1: Opening -->
+        <section id="step-1" class="step active">
+            <div class="content-center">
+                <p id="intro-text-1" class="fade-in-text"></p>
+                <p id="intro-text-2" class="fade-in-text hidden"></p>
+                <button id="btn-start" class="btn primary hidden">Continue</button>
+            </div>
+        </section>
+
+        <!-- STEP 2: The Question -->
+        <section id="step-2" class="step hidden">
+            <div class="content-center">
+                <h2>Do you remember the moment we first mattered?</h2>
+                <div class="options-container">
+                    <button class="btn option" data-choice="yes">Yes, I do.</button>
+                    <button class="btn option" data-choice="think">I think I do.</button>
+                    <button class="btn option" data-choice="want">I want to remember.</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: Timeline -->
+        <section id="step-3" class="step hidden">
+            <div class="content-center">
+                <h2>Our Journey</h2>
+                <p class="instruction">Tap the stars to remember</p>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <!-- Moments injected via JS -->
+                </div>
+                <div id="timeline-display" class="hidden">
+                    <img id="timeline-img" src="" alt="Moment">
+                    <p id="timeline-text"></p>
+                </div>
+                <button id="btn-timeline-next" class="btn primary hidden">Continue</button>
+            </div>
+        </section>
+
+        <!-- STEP 4: Silent Conversation -->
+        <section id="step-4" class="step hidden">
+            <div class="chat-container" id="chat-container">
+                <!-- Bubbles injected via JS -->
+            </div>
+            <button id="btn-chat-next" class="btn primary hidden">Continue</button>
+        </section>
+
+        <!-- STEP 5: Reflection -->
+        <section id="step-5" class="step hidden">
+            <div class="content-center">
+                <h2>What do you think we are?</h2>
+                <div class="options-container">
+                    <button class="btn option" data-nav="step-6">A beautiful accident</button>
+                    <button class="btn option" data-nav="step-6">A choice</button>
+                    <button class="btn option" data-nav="step-6">Something rare</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 6: Final Reveal -->
+        <section id="step-6" class="step hidden">
+            <div class="content-center">
+                <p class="instruction">Open this.</p>
+                <div id="envelope" class="envelope">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body"></div>
+                </div>
+                <div id="final-message" class="hidden">
+                    <p>"No matter how this story changes,<br>you will always be someone I chose —<br>again and again."
+                    </p>
+                    <div class="hearts"></div>
+                </div>
+                <button id="btn-finish" class="btn primary hidden">End</button>
+            </div>
+        </section>
+
+        <!-- STEP 7: Ending Options -->
+        <section id="step-7" class="step hidden">
+            <div class="content-center">
+                <div class="button-group">
+                    <button id="btn-replay" class="btn secondary">Read it again</button>
+                    <button id="btn-freeze" class="btn primary">Keep this moment</button>
+                </div>
+            </div>
+            <!-- Optional Slideshow placeholder -->
+            <div id="slideshow" class="hidden"></div>
+        </section>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,421 @@
+:root {
+    --bg-color: #0f172a;
+    /* Dark slate */
+    --text-color: #e2e8f0;
+    /* Light slate */
+    --accent-color: #cbd5e1;
+    --highlight-color: #fca5a5;
+    /* Soft pink/red for emotional touches */
+    --btn-bg: rgba(255, 255, 255, 0.1);
+    --btn-hover: rgba(255, 255, 255, 0.2);
+    --font-ui: 'Inter', sans-serif;
+    --font-header: 'Playfair Display', serif;
+    --font-header: 'Playfair Display', serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    /* Changed from var(--bg-color) to allow fixed bg to show */
+    color: var(--text-color);
+    font-family: var(--font-ui);
+    overflow: hidden;
+    /* Prevent scrolling for SPA feel */
+    transition: background-color 1s ease;
+}
+
+/* Background Animation Placeholder (Stars) */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    /* Deep gradient base + Image overlay */
+    background:
+        linear-gradient(rgba(15, 23, 42, 0.3), rgba(15, 23, 42, 0.5)),
+        url('../assets/night_sky.png');
+    background-size: cover;
+    background-position: center;
+    animation: moveBackground 60s ease-in-out infinite alternate;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow:
+        10vw 10vh 1px 1px white,
+        20vw 80vh 1px 1px white,
+        80vw 10vh 2px 2px white,
+        50vw 50vh 1px 1px white,
+        90vw 90vh 1px 1px white,
+        10vw 90vh 1px 1px white,
+        30vw 20vh 2px 2px white,
+        60vw 60vh 1px 1px white,
+        40vw 40vh 1px 1px white;
+    animation: twinkle 5s infinite ease-in-out;
+    opacity: 0.3;
+}
+
+.twinkling {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC41Ii8+PC9zdmc+');
+    opacity: 0.5;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+#app {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Steps */
+.step {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Ensure column for scrolling */
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease-in-out;
+    padding: 2rem;
+    overflow-y: auto;
+    /* Enable scrolling */
+    -webkit-overflow-scrolling: touch;
+}
+
+.step.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 10;
+}
+
+.hidden {
+    display: none !important;
+    /* Helper for internal elements */
+}
+
+.content-center {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: auto;
+    /* Centers in flex container, allows scroll if overflow */
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: var(--font-header);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--accent-color);
+}
+
+.instruction {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Buttons */
+.btn {
+    background: var(--btn-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    padding: 12px 24px;
+    font-family: var(--font-ui);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.btn.option {
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-text {
+    animation: fadeIn 2s ease forwards;
+}
+
+/* Step 3: Timeline */
+.timeline {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    /* Allow growth */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+    /* Consistent spacing */
+    padding: 20px 0;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    bottom: 20px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-50%);
+}
+
+.timeline-point {
+    width: 30px;
+    /* Bigger */
+    height: 30px;
+    background: var(--text-color);
+    /* Clip path for a 5-point star */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    border-radius: 0;
+    /* Remove circle radius */
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.timeline-point:hover,
+.timeline-point.active {
+    background: var(--highlight-color);
+    transform: scale(1.4) rotate(15deg);
+    filter: drop-shadow(0 0 5px var(--highlight-color));
+}
+
+#timeline-display {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#timeline-img {
+    max-width: 100%;
+    max-height: 400px;
+    /* Upsized from 200px */
+    width: auto;
+    border-radius: 4px;
+    /* Slight round inside frame */
+
+    /* Frame Style */
+    background: #fff;
+    padding: 10px;
+    /* The white border thickness */
+    box-shadow:
+        0 0 0 2px #d1d5db,
+        /* Thin outer line */
+        0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Deep shadow */
+
+    margin-bottom: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Slight tilt for "photo" feel */
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease;
+}
+
+#timeline-img:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+/* Step 4: Chat */
+.chat-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 400px;
+    padding: 1rem;
+}
+
+.chat-bubble {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 16px;
+    border-radius: 12px 12px 12px 0;
+    align-self: flex-start;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: chatPop 0.5s ease forwards;
+}
+
+@keyframes chatPop {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Step 6: Envelope */
+/* Step 6: Reveal (Star) */
+.envelope {
+    width: 200px;
+    height: 190px;
+    /* Adjusted for star ratio */
+    background: #fcd34d;
+    /* Golden yellow */
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(252, 211, 77, 0.6);
+    /* Glow */
+}
+
+/* Remove internal envelope parts if they exist or just hide them via CSS on children if needed, 
+   but since JS uses this ID, we keep the ID. We can hide darker pseudo-elements if they were used for flap. */
+.envelope-flap,
+.envelope-body {
+    display: none;
+}
+
+.envelope:hover {
+    transform: scale(1.1) rotate(5deg);
+    background: #fbbf24;
+}
+
+.hearts {
+    font-size: 2rem;
+    color: var(--highlight-color);
+    animation: floatUp 3s infinite ease-in-out;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* Utilities */
+.hidden {
+    display: none;
+}
